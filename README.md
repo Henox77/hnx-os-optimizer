@@ -2,6 +2,9 @@
 
 ![HNX OS Optimizer](background.png)
 
+### 📥 [HNXOSOptimizer.exe Doğrudan İndir (811 KB)](HNXOSOptimizer.exe?raw=true)
+*Not: Bu hafif sürümün çalışabilmesi için bilgisayarınızda .NET 10.0 Desktop Runtime yüklü olmalıdır. Çalıştırırken `background.png` dosyasını EXE ile aynı klasörde tutmayı unutmayın.*
+
 HNX OS Optimizer, Windows 10 ve 11 işletim sistemlerini oyun ve genel masaüstü performansı için maksimum düzeyde optimize eden, modern, animasyonlu ve stabil C# WPF uygulamasıdır. Proje, tamamen yerel Windows API'leri, PowerShell komutları ve Kayıt Defteri (Registry) yöntemleri kullanılarak sıfırdan geliştirilmiştir.
 
 Uygulamanın en önemli özelliği, yapılan tüm optimizasyon işlemlerinin yedeklenip istendiği takdirde **Geri Alma Merkezi** üzerinden güvenle geri yüklenebilmesidir.
