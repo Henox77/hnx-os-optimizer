@@ -1,0 +1,170 @@
+<UserControl x:Class="HNXOSOptimizer.PrivacyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HNXOSOptimizer"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="780"
+             Loaded="UserControl_Loaded">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,15">
+            <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivTitle]}" FontSize="24" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+            <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivSubtitle]}" FontSize="13" Foreground="{StaticResource TextSecondary}" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0"/>
+        </StackPanel>
+
+        <!-- Scrollable content -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="0,0,10,0">
+                <!-- Telemetry Slider Card -->
+                <Border Background="{StaticResource BgCard}" CornerRadius="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15" Margin="0,0,0,12">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="220"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivTelemetry]}" FontSize="15" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+                            <TextBlock x:Name="TxtTelemetryLevelDesc" Text="Yükleniyor..." FontSize="12" Foreground="{StaticResource TextSecondary}" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                        </StackPanel>
+                        <Slider x:Name="SliderTelemetry" Grid.Row="0" Grid.Column="1" Minimum="0" Maximum="3" Value="0" IsSnapToTickEnabled="True" TickFrequency="1" VerticalAlignment="Center" ValueChanged="SliderTelemetry_ValueChanged"/>
+                    </Grid>
+                </Border>
+
+                <!-- Toggles Grid -->
+                <UniformGrid Columns="2">
+                    <!-- Cortana Toggle Card -->
+                    <Border Background="{StaticResource BgCard}" CornerRadius="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivCortana]}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivCortanaDesc]}" FontSize="11" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <ToggleButton x:Name="ToggleCortana" Grid.Column="1" Style="{StaticResource ToggleSwitch}" VerticalAlignment="Center" Click="TogglePrivacy_Click" Tag="Cortana"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Copilot Toggle Card -->
+                    <Border Background="{StaticResource BgCard}" CornerRadius="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivCopilot]}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivCopilotDesc]}" FontSize="11" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <ToggleButton x:Name="ToggleCopilot" Grid.Column="1" Style="{StaticResource ToggleSwitch}" VerticalAlignment="Center" Click="TogglePrivacy_Click" Tag="Copilot"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- OneDrive Toggle Card -->
+                    <Border Background="{StaticResource BgCard}" CornerRadius="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivOneDrive]}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivOneDriveDesc]}" FontSize="11" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <ToggleButton x:Name="ToggleOneDrive" Grid.Column="1" Style="{StaticResource ToggleSwitch}" VerticalAlignment="Center" Click="TogglePrivacy_Click" Tag="OneDrive"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Edge Telemetry Toggle Card -->
+                    <Border Background="{StaticResource BgCard}" CornerRadius="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivEdge]}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivEdgeDesc]}" FontSize="11" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <ToggleButton x:Name="ToggleEdgeTelemetry" Grid.Column="1" Style="{StaticResource ToggleSwitch}" VerticalAlignment="Center" Click="TogglePrivacy_Click" Tag="EdgeTelemetry"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Office Telemetry Toggle Card -->
+                    <Border Background="{StaticResource BgCard}" CornerRadius="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivOffice]}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivOfficeDesc]}" FontSize="11" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <ToggleButton x:Name="ToggleOfficeTelemetry" Grid.Column="1" Style="{StaticResource ToggleSwitch}" VerticalAlignment="Center" Click="TogglePrivacy_Click" Tag="OfficeTelemetry"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Advertising ID Toggle Card -->
+                    <Border Background="{StaticResource BgCard}" CornerRadius="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivAd]}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivAdDesc]}" FontSize="11" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <ToggleButton x:Name="ToggleAdId" Grid.Column="1" Style="{StaticResource ToggleSwitch}" VerticalAlignment="Center" Click="TogglePrivacy_Click" Tag="AdId"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Location Services Toggle Card -->
+                    <Border Background="{StaticResource BgCard}" CornerRadius="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivLocation]}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivLocationDesc]}" FontSize="11" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <ToggleButton x:Name="ToggleLocation" Grid.Column="1" Style="{StaticResource ToggleSwitch}" VerticalAlignment="Center" Click="TogglePrivacy_Click" Tag="Location"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Feedback Frequency Toggle Card -->
+                    <Border Background="{StaticResource BgCard}" CornerRadius="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivFeedback]}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PrivFeedbackDesc]}" FontSize="11" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <ToggleButton x:Name="ToggleFeedback" Grid.Column="1" Style="{StaticResource ToggleSwitch}" VerticalAlignment="Center" Click="TogglePrivacy_Click" Tag="Feedback"/>
+                        </Grid>
+                    </Border>
+                </UniformGrid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

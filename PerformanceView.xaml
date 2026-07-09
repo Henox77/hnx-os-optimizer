@@ -1,0 +1,171 @@
+<UserControl x:Class="HNXOSOptimizer.PerformanceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HNXOSOptimizer"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="780"
+             Loaded="UserControl_Loaded">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,15">
+            <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfTitle]}" FontSize="24" FontWeight="Bold" FontFamily="{StaticResource MainFont}" Foreground="{StaticResource TextPrimary}"/>
+            <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfSubtitle]}" FontSize="13" FontFamily="{StaticResource MainFont}" Foreground="{StaticResource TextSecondary}" Margin="0,4,0,0"/>
+        </StackPanel>
+
+        <!-- Scrollable Settings -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="0,0,10,0">
+                <!-- Power Plan Selection Card -->
+                <Border Background="{StaticResource BgCard}" CornerRadius="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15" Margin="0,0,0,12">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="220"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfActivePlan]}" FontSize="15" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+                            <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfActivePlanDesc]}" FontSize="12" Foreground="{StaticResource TextSecondary}" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0"/>
+                        </StackPanel>
+                        <ComboBox x:Name="ComboPowerPlans" Grid.Column="1" VerticalAlignment="Center" SelectionChanged="ComboPowerPlans_SelectionChanged">
+                            <ComboBoxItem Content="Dengeli (Balanced)" Tag="381b4222-f694-41f0-9685-ff5bb260df2e"/>
+                            <ComboBoxItem Content="Güç Tasarrufu (Power Saver)" Tag="a1841308-3541-4fab-bc81-f71556f20b4a"/>
+                            <ComboBoxItem Content="Yüksek Performans (High Perf)" Tag="8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"/>
+                            <ComboBoxItem Content="Nihai Performans (Ultimate)" Tag="e9a22250-ee3e-417d-9a8c-97d1a7d6eb7a"/>
+                        </ComboBox>
+                    </Grid>
+                </Border>
+
+                <!-- Toggles Grid -->
+                <UniformGrid Columns="2">
+                    <!-- Game Mode Toggle Card -->
+                    <Border Background="{StaticResource BgCard}" CornerRadius="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfGameMode]}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfGameModeDesc]}" FontSize="11" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <ToggleButton x:Name="ToggleGameMode" Grid.Column="1" Style="{StaticResource ToggleSwitch}" VerticalAlignment="Center" Click="ToggleGameMode_Click"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Visual Effects Toggle Card -->
+                    <Border Background="{StaticResource BgCard}" CornerRadius="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfVisual]}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfVisualDesc]}" FontSize="11" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <ToggleButton x:Name="ToggleVisualEffects" Grid.Column="1" Style="{StaticResource ToggleSwitch}" VerticalAlignment="Center" Click="ToggleVisualEffects_Click"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- SysMain Service Toggle Card -->
+                    <Border Background="{StaticResource BgCard}" CornerRadius="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfSysMain]}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfSysMainDesc]}" FontSize="11" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <ToggleButton x:Name="ToggleSysMain" Grid.Column="1" Style="{StaticResource ToggleSwitch}" VerticalAlignment="Center" Click="ToggleSysMain_Click"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Windows Search Service Toggle Card -->
+                    <Border Background="{StaticResource BgCard}" CornerRadius="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfWSearch]}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfWSearchDesc]}" FontSize="11" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <ToggleButton x:Name="ToggleWSearch" Grid.Column="1" Style="{StaticResource ToggleSwitch}" VerticalAlignment="Center" Click="ToggleWSearch_Click"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Windows Update Service Toggle Card -->
+                    <Border Background="{StaticResource BgCard}" CornerRadius="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfUpdates]}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfUpdatesDesc]}" FontSize="11" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <ToggleButton x:Name="ToggleUpdates" Grid.Column="1" Style="{StaticResource ToggleSwitch}" VerticalAlignment="Center" Click="ToggleUpdates_Click"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Xbox Live Services Toggle Card -->
+                    <Border Background="{StaticResource BgCard}" CornerRadius="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfXbox]}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfXboxDesc]}" FontSize="11" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <ToggleButton x:Name="ToggleXbox" Grid.Column="1" Style="{StaticResource ToggleSwitch}" VerticalAlignment="Center" Click="ToggleXbox_Click"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Print Spooler Service Toggle Card -->
+                    <Border Background="{StaticResource BgCard}" CornerRadius="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfPrint]}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfPrintDesc]}" FontSize="11" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <ToggleButton x:Name="TogglePrintSpooler" Grid.Column="1" Style="{StaticResource ToggleSwitch}" VerticalAlignment="Center" Click="TogglePrintSpooler_Click"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Telemetry Services Toggle Card -->
+                    <Border Background="{StaticResource BgCard}" CornerRadius="10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="15" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,10,0">
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfDiag]}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" FontFamily="{StaticResource MainFont}"/>
+                                <TextBlock Text="{Binding Source={x:Static local:LocalizationProvider.Instance}, Path=[PerfDiagDesc]}" FontSize="11" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap" FontFamily="{StaticResource MainFont}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <ToggleButton x:Name="ToggleDiagTrack" Grid.Column="1" Style="{StaticResource ToggleSwitch}" VerticalAlignment="Center" Click="ToggleDiagTrack_Click"/>
+                        </Grid>
+                    </Border>
+                </UniformGrid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

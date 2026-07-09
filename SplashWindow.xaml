@@ -1,0 +1,80 @@
+<Window x:Class="HNXOSOptimizer.SplashWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="HNX OS Optimizer" Height="330" Width="550"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Topmost="True"
+        Loaded="Window_Loaded">
+    
+    <Border CornerRadius="12" ClipToBounds="True" BorderBrush="#303045" BorderThickness="1">
+        <Grid>
+            <!-- Background Image Brush dynamically set in Code-Behind -->
+            <Grid.Background>
+                <ImageBrush x:Name="BgImageBrush" Stretch="UniformToFill"/>
+            </Grid.Background>
+
+            <!-- Dark semi-transparent overlay -->
+            <Border Background="#F50D0D11" CornerRadius="11">
+                <Grid>
+                    <!-- Layout structure -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>    <!-- Center logo/title -->
+                        <RowDefinition Height="Auto"/> <!-- Spinner area -->
+                        <RowDefinition Height="45"/>   <!-- Footer credits -->
+                    </Grid.RowDefinitions>
+
+                    <!-- Center Title & Icon -->
+                    <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,30,0,0">
+                        <TextBlock Text="⚡" FontSize="44" Foreground="#FFD700" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                        <TextBlock Text="HNX OS Optimizer" FontSize="28" FontWeight="Bold" FontFamily="Segoe UI, Inter" HorizontalAlignment="Center">
+                            <TextBlock.Foreground>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#FFD700" Offset="0.0" />
+                                    <GradientStop Color="#FFFFFF" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </TextBlock.Foreground>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <!-- Spinner Loader (Circular vector animation) -->
+                    <Grid Grid.Row="1" Width="40" Height="40" Margin="0,10,0,30">
+                        <!-- Background Circle -->
+                        <Ellipse Stroke="#202030" StrokeThickness="3.5" Width="36" Height="36"/>
+                        <!-- Foreground Spinning Arc -->
+                        <Path Stroke="#FFD700" StrokeThickness="3.5" 
+                              Data="M 18,0 A 18,18 0 0 1 36,18" 
+                              HorizontalAlignment="Center" VerticalAlignment="Center" 
+                              Width="36" Height="36"
+                              RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <RotateTransform x:Name="SpinnerRotate"/>
+                            </Path.RenderTransform>
+                            <Path.Triggers>
+                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="SpinnerRotate"
+                                                             Storyboard.TargetProperty="Angle"
+                                                             From="0" To="360" Duration="0:0:1.2" RepeatBehavior="Forever"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Path.Triggers>
+                        </Path>
+                    </Grid>
+
+                    <!-- Footer credits -->
+                    <Grid Grid.Row="2" Background="#12121A" VerticalAlignment="Bottom" Height="45">
+                        <TextBlock Text="Henox77 | efeyylw" 
+                                   Foreground="#A5A5C5" 
+                                   FontFamily="Segoe UI Semibold" 
+                                   FontSize="12" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" 
+                                   Opacity="0.8"/>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>
